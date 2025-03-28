@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/dbcc2cf52e.js" crossorigin="anonymous"></script>
+    <title>KU Scheduler</title>
+</head>
+<body>
+    <!-- True landing / Error Screen -->
+    <!-- Also will be shown to users that don't have javascript enabled, hence the message -->
+    <div id="main">
+        Please enable Javascript
+    </div>
+
+    <!-- Dashboard Screen -->
+    <template id="DashboardTemplate">
+        <div id="Landing_Page">
+            <div id="Header">
+              <div id="Rectangle_1" class="pointer-events-none">
+              </div>
+              <div id="Rectangle_2" class="pointer-events-none">
+              </div>
+              <span id="LogoBox" class="pointer-events-none"><span id="KULogo">Kettering University</span></span>
+              <button id="Profile" class = "Profile">
+              </div>
+            </div>
+          </div>
+      
+          <div id="profileMenu" class="profileMenu hide">
+              <div id="Profile_0">
+                <div id="Profile_1" class="pointer-events-none">
+                </div>
+                <span id="_50_36" class="pointer-events-none"><button id="Dashboard" onclick="renderDashboard()">Dashboard</button></span>
+                <span id="_50_37" class="pointer-events-none"><button id="LogOut" onclick="logOut()">Log Out</button></span>
+              </div>
+            </div>
+
+        <table class="DashboardTable">
+            <tr>
+                <td rowspan="2">
+                    <h1>Schedule Dashboard</h1>
+                    <div id="containerCal">
+                        <div id="calheader">
+                          <div id="monthDisplay"></div>
+                          <div>
+                            <button id="backButton">Back</button>
+                            <button id="nextButton">Next</button>
+                          </div>
+                        </div>
+                  
+                        <div id="weekdays">
+                          <div>Sunday</div>
+                          <div>Monday</div>
+                          <div>Tuesday</div>
+                          <div>Wednesday</div>
+                          <div>Thursday</div>
+                          <div>Friday</div>
+                          <div>Saturday</div>
+                        </div>
+                  
+                        <div id="calendar"></div>
+                      </div>
+                  
+                      <div id="newEventModal">
+                        <h2>New Event</h2>
+                  
+                        <input id="eventTitleInput" placeholder="Event Title" />
+                        <input id="eventStartTime" placeholder="Start" />
+                        <input id="eventEndTime" placeholder="End" />
+
+                  
+                        <button id="saveButton">Save</button>
+                        <button id="cancelButton">Cancel</button>
+                      </div>
+                  
+                      <div id="deleteEventModal">
+                        <h2>Event</h2>
+                  
+                        <p id="eventText"></p>
+                  
+                        <button id="deleteButton">Delete</button>
+                        <button id="closeButton">Close</button>
+                      </div>
+                  
+                      <div id="modalBackDrop"></div>
+                    <div class="shiftList">
+                        <b>Your Shifts:</b>
+                        <ul id="shiftList" class="shiftHeader">
+                            <li>Basic Shift. 12/2/24, 12:00 to 14:00</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="teamList">
+                        <b>Your Teams:</b> 
+                        <ul id="teamList">
+                            <li><a href="#" onclick=" goToTeam('team'); ">Test</a></li>
+                        </ul>
+                        <br>
+                        <a href="#" onclick="renderCreateTeam()">Create New Team</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="teamList">
+                        <b>Your invites:</b> 
+                        <ul id="inviteList">
+                            <!--<li><a href="#" onclick=" acceptInvite('team'); ">Test</a></li>-->
+                            <li>You have no invites!</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </template>
+
+    <!-- Login Screen -->
+    <template id="LoginTemplate">
+        <div class="container">
+            <div class = "form-box">
+                <h1 id="title" > Sign Up</h1>
+                <form>
+                    <div class="input-group">
+                        <div class="input-field" id = "nameField" >
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" placeholder="Name" required>
+                        </div>
+        
+                        <div class="input-field">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" placeholder="email" id="emailField">
+                        </div>
+        
+                        <div class="input-field" >
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" placeholder="password" id="passwordField">
+                        </div>
+                            <p>Lost password <a href="#"> Click Here!</a></p>
+                    </div>
+                    <div class="btn-field">
+                        <button type="button" id="signupBtn" onclick=signUp()>Sign up</button>
+                        <button type="button" id="signinBtn" class="disable" onclick=signIn()>Sign in</button>
+                        <button type="button" id="submitBtn" class="disable" onclick=auth()>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Team Screen -->
+    <template id="TeamTemplate">
+        <div id="Landing_Page">
+            <div id="Header">
+              <div id="Rectangle_1" class="pointer-events-none">
+              </div>
+              <div id="Rectangle_2" class="pointer-events-none">
+              </div>
+              <span id="LogoBox" class="pointer-events-none"><span id="KULogo">Kettering University</span></span>
+              <button id="Profile" class = "Profile">
+              </div>
+            </div>
+          </div>
+      
+          <div id="profileMenu" class="profileMenu hide">
+              <div id="Profile_0">
+                <div id="Profile_1" class="pointer-events-none">
+                </div>
+                <span id="_50_36" class="pointer-events-none"><button id="Dashboard" onclick="renderDashboard()">Dashboard</button></span>
+                <span id="_50_37" class="pointer-events-none"><button id="LogOut" onclick="logOut()">Log Out</button></span>
+              </div>
+            </div>
+
+        <div class="middleCol">
+            <h1 class="teamName" id="teamName">Team Page Test</h1>
+            <div class="btn-field" id="adminField">
+                <button type="button" id="createShiftBtn" onclick=renderCreateShift()>Create Shift</button>
+                <button type="button" id="inviteBtn" onclick=renderInviteMember()>Invite Member</button>
+                <button type="button" id="editTeamBtn" onclick=editTeam()>Edit Team</button>
+            </div>
+        </div>
+
+        <br><br><br>
+        <div class="teamShiftList">
+            <b>This Team's Shifts:</b>
+            <ul id="teamShiftList" class="shiftHeader">
+                <li><a href="#" onclick=" acceptShift('shift'); ">Test Unclaimed Shift. 12/2/24, 12:00 to 14:00</a></li>
+            </ul>
+        </div>
+    </template>
+
+    <!-- Create Team -->
+    <template id="CreateTeamTemplate">
+        <div class="container">
+            <div class = "form-box">
+                <h1 id="title" > Create Team </h1>
+                <a href="#" onclick="renderDashboard()">Go Back</a>
+                <form>
+                    <div class="input-group">
+                        <div class="input-field">
+                            <!--<i class="fa-solid fa-user"></i>-->
+                            <input id="teamName" type="text" placeholder="Team Name" required>
+                        </div>
+                    </div>
+                    <div class="btn-field">
+                        <button type="button" id="submitBtn" onclick=createTeam()>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Invite Member -->
+    <template id="InviteMemberTemplate">
+        <div class="container">
+            <div class = "form-box">
+                <h1 id="title" > Invite Member</h1>
+                <a href="#" onclick="renderDashboard()">Go Back</a>
+                <form>
+                    <div class="input-group">
+                        <div class="input-field">
+                            <i class="fa-solid fa-user"></i>
+                            <input id="recipientEmail" type="text" placeholder="Members's Email" required>
+                        </div>
+                    </div>
+                    <div class="btn-field">
+                        <button type="button" id="submitBtn" onclick=inviteMember()>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Create Shift -->
+    <template id="CreateShiftTemplate">
+        <div class="container">
+            <div class = "form-box">
+                <h1 id="title" > Create Shift </h1>
+                <a href="#" onclick="renderDashboard()">Go Back</a>
+                <form>
+                    <div class="input-group">
+                        <div class="input-field">
+                            <i class="fa-solid fa-signature"></i>
+                            <input id="shiftName" type="text" placeholder="Shift Name" required>
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-clock"></i>
+                            <input id="startingTime" type="text" placeholder="Starting Time" required>
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-clock"></i>
+                            <input id="endingTime" type="text" placeholder="Ending Time" required>
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-calendar"></i>
+                            <input id="shiftDate" type="text" placeholder="Shift Date" required>
+                        </div>
+                    </div>
+                    <div class="btn-field">
+                        <button type="button" id="submitBtn" onclick=createShift()>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+
+</body>
+<script src="dirtyDB.js"></script>
+<script src="login.js"></script>
+<script src="dashboard.js"></script>
+<script src="teams.js"></script>
+<script src="app.js"></script>
+</html>
